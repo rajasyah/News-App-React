@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ search }) => {
+  const [text, setText] = useState("");
+  const handleSearch = (e) => {
+    e.preventDefault();
+    search(text);
+  };
+
   return (
     <div className="flex items-center justify-between h-12 bg-gray-700">
       <h1 className="text-white font-bold text-lg pl-5 ">RooNews</h1>
@@ -19,11 +25,20 @@ const Navbar = () => {
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
           />
         </svg>
-        <input
-          type="text"
-          placeholder="Search News..."
-          className="bg-transparent focus:outline-none"
-        />
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Search News..."
+            className="bg-transparent focus:outline-none"
+            onChange={(e) => setText(e.target.value)}
+          />
+          <button
+            type="submit"
+            className="bg-gray-400 text-white rounded-md px-3 shadaow-lg"
+          >
+            Search
+          </button>
+        </form>
       </div>
     </div>
   );
